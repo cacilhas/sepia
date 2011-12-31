@@ -46,13 +46,13 @@ function loop()
 	server = sss.socket(sss.af.inet, sss.sock.stream)
 
 	status, error = server:setopt(sss.so.reuseaddr)
-	if not status then return status, error end
+	if not status then return status, "error trying to set SO_REUSEADDR: " .. error end
 
 	status, error = server:bind(_address)
-	if not status then return status, error end
+	if not status then return status, "error trying to bind address: " .. error end
 
 	status, error = server:listen(10)
-	if not status then return status, error end
+	if not status then return status, "error trying to set listen length: " .. error end
 
 	local thread = require "thread"
 
