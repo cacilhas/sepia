@@ -9,7 +9,7 @@ LUA_CPATH= $(LUA_PREFIX)/lib/lua$(LUA_SUFFIX)
 
 #-----------------------------------------------------------------------
 test: $(TARGET)
-	@LUA_CPATH="$(LUA_CPATH)/?.so;$(LUA_CPATH)/?.so;$(LUA_CPATH)/?/l?.so" LUA_PATH="$(LUA_PATH)/?.lua;src/?.lua;src/?/init.lua" $(LUA) tests/init.lua
+	@LUA_CPATH="$(LUA_CPATH)/?.so;$(LUA_CPATH)/l?.so;$(LUA_CPATH)/?/l?.so" LUA_PATH="$(LUA_PATH)/?.lua;src/?.lua;src/?/init.lua" $(LUA) tests/init.lua
 
 
 install:
