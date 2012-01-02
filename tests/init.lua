@@ -2,7 +2,7 @@ require "mgunit"
 
 table.foreachi(
 	{
-		"tests/test_latimani.lua",
+		"tests/test_stringutils.lua",
 		"tests/test_log.lua",
 	},
 	function (_, file)

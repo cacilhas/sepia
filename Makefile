@@ -15,4 +15,3 @@ test: $(TARGET)
 install:
 	$(MD) $(LUA_PATH)/sepia
 	$(CP) src/sepia/* $(LUA_PATH)/sepia/
-	$(CP) src/*.lua $(LUA_PATH)/

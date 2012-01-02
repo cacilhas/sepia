@@ -1,7 +1,7 @@
-require "latimani"
+require "sepia"
 
 return {
-	name = "TestLatimani",
+	name = "TestStringUtils",
 
 	test_capitalize_lower = function(self)
 		local parameter = "sepia latimanus"
