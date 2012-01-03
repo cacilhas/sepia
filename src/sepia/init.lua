@@ -57,7 +57,10 @@ function loop()
 	while true do
 		local client, host, port = server:accept()
 		local f = function()
-			_application(client, { host = host, port = port })
+			xpcall(
+				function () _application(client, { host = host, port = port }) end,
+				sepia.log.fatal
+			)
 			client:close()
 		end
 		local thr = thread.create(f)
