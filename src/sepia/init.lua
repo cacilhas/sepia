@@ -43,8 +43,10 @@ function loop()
 	end
 
 	require "sepia.log"
-	system.print = _G.print
-	_G.print = sepia.log.info
+	if _G.print ~= sepia.log.info then
+		system.print = _G.print
+		_G.print = sepia.log.info
+	end
 
 	local server, status, error
 	server = sss.socket(sss.af.inet, sss.sock.stream)
@@ -54,16 +56,19 @@ function loop()
 
 	local thread = require "thread"
 
+	-- Point of no return
 	while true do
 		local client, host, port = server:accept()
-		local f = function ()
+		local callback = function ()
 			xpcall(
-				function () _application(client, { host = host, port = port }) end,
+				function ()
+					_application(client, { host = host, port = port })
+				end,
 				sepia.log.fatal
 			)
 			client:close()
 		end
-		local thr = thread.create(f)
+		local thr = thread.create(callback)
 		thr:resume()
 	end
 end
