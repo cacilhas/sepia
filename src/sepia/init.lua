@@ -43,8 +43,8 @@ function loop()
 	end
 
 	require "sepia.log"
-	system.print = _G["print"]
-	_G["print"] = sepia.log.info
+	system.print = _G.print
+	_G.print = sepia.log.info
 
 	local server, status, error
 	server = sss.socket(sss.af.inet, sss.sock.stream)
