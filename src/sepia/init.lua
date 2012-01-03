@@ -18,7 +18,7 @@ function register_application(app)
 		_application = app
 		return true
 	else
-		return nil, "function required"
+		error("function required", 2)
 	end
 end
 
@@ -28,18 +28,18 @@ function bind(address)
 		_address = address
 		return true
 	else
-		return nil, "table with format { host = host, port = port }"
+		error("table with format { host = host, port = port }", 2)
 	end
 end
 
 
 function loop()
 	if _application == 0 then
-		return nil, "no application registered"
+		error("no application registered", 2)
 	end
 
 	if _address == 0 then
-		return nil, "no address bound"
+		error("no address bound", 2)
 	end
 
 	require "sepia.log"
@@ -48,15 +48,9 @@ function loop()
 
 	local server, status, error
 	server = sss.socket(sss.af.inet, sss.sock.stream)
-
-	status, error = server:setopt(sss.so.reuseaddr)
-	if not status then return status, "error trying to set SO_REUSEADDR: " .. error end
-
-	status, error = server:bind(_address)
-	if not status then return status, "error trying to bind address: " .. error end
-
-	status, error = server:listen(10)
-	if not status then return status, "error trying to set listen length: " .. error end
+	server:setopt(sss.so.reuseaddr)
+	server:bind(_address)
+	server:listen(10)
 
 	local thread = require "thread"
 
