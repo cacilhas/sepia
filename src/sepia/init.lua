@@ -181,3 +181,36 @@ string.urlize = function (self)
 	aux = aux:gsub("%s", "+")
 	return aux
 end
+
+
+-- Table utils ---------------------------------------------------------
+
+table.map = function (t, f)
+	local resp = {}
+	table.foreachi(t, function (_, value)
+		table.insert(resp, f(value))
+	end)
+	return resp
+end
+
+
+table.reduce = function (t, f)
+	if #t < 2 then
+		error "cannot reduce table with less than 2 elements"
+	end
+
+	local accumulator
+	table.foreachi(t, function (i, value)
+		if i == 1 then
+			accumulator = value
+		else
+			accumulator = f(accumulator, value)
+		end
+	end)
+	return accumulator
+end
+
+
+table.map_reduce = function (t, ft)
+	return table.reduce(table.map(t, ft.map), ft.reduce)
+end
