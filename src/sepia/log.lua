@@ -16,11 +16,11 @@ FATAL = 4
 
 
 local levelname = {
-	[0] = "DEBUG",
-	[1] = "INFO",
-	[2] = "WARNING",
-	[3] = "ERROR",
-	[4] = "FATAL",
+	[DEBUG] = "DEBUG",
+	[INFO] = "INFO",
+	[WARNING] = "WARNING",
+	[ERROR] = "ERROR",
+	[FATAL] = "FATAL",
 }
 
 
