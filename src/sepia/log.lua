@@ -48,7 +48,7 @@ function set_output(filename)
 
 	else
 		local fd, err = io.open(filename, "a")
-		if not fd then return fd, err end
+		if not fd then error(err, 2) end
 
 		_output = fd
 		return true
