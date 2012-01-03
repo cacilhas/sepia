@@ -38,7 +38,11 @@ function config(resource)
 		config(resource())
 
 	elseif resource_type == "thread" then
-		config(coroutine.resume(resource))
+		local status, value = coroutine.resume(resource)
+		while status do
+			config(value)
+			status, value = coroutine.resume(resource)
+		end
 
 	else
 		error("unsupported type " .. resource_type, 2)
