@@ -28,6 +28,25 @@ local _level = INFO
 local _output = io.stdout
 
 
+function config(resource)
+	local resource_type = type(resource)
+
+	if resource_type == "table" then
+		if resource.level then set_level(resource.level) end
+		if resource.output then set_output(resource.output) end
+
+	elseif resource_type == "function" then
+		config(resource())
+
+	elseif resource_type == "thread" then
+		config(coroutine.resume(resource))
+
+	else
+		error("unsupported type " .. resource_type, 2)
+	end
+end
+
+
 function set_level(level)
 	if level >= DEBUG and level <= FATAL then
 		_level = level
