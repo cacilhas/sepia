@@ -56,7 +56,7 @@ function loop()
 
 	while true do
 		local client, host, port = server:accept()
-		local f = function()
+		local f = function ()
 			xpcall(
 				function () _application(client, { host = host, port = port }) end,
 				sepia.log.fatal
@@ -71,7 +71,7 @@ end
 
 -- String utils --------------------------------------------------------
 
-string.capitalize = function(self)
+string.capitalize = function (self)
 	local aux = self:gsub("(%w)(%w*)", function (g1, g2)
 		return g1:upper() ..g2:lower()
 	end, 1)
@@ -79,7 +79,7 @@ string.capitalize = function(self)
 end
 
 
-string.capwords = function(self)
+string.capwords = function (self)
 	local aux = self:gsub("(%w)(%w*)", function (g1, g2)
 		return g1:upper() ..g2:lower()
 	end)
@@ -131,7 +131,7 @@ string.deurlize = function (self)
 end
 
 
-string.endswith = function(self, s)
+string.endswith = function (self, s)
 	local aux = self:match(s .. "$")
 		if aux then
 			return true
@@ -141,23 +141,23 @@ string.endswith = function(self, s)
 end
 
 
-string.join = function(self, t)
+string.join = function (self, t)
 	return table.concat(t, self)
 end
 
 
-string.ltrim = function(self)
+string.ltrim = function (self)
 	local aux = self:gsub("^%s*(.+)$", "%1")
 	return aux
 end
 
 
-string.rtrim = function(self)
+string.rtrim = function (self)
 	local aux = self:gsub("^(.-)%s*$", "%1")
 	return aux
 end
 
-string.startswith = function(self, s)
+string.startswith = function (self, s)
 	local aux = self:match("^" .. s)
 	if aux then
 		return true
@@ -167,13 +167,13 @@ string.startswith = function(self, s)
 end
 
 
-string.trim = function(self)
+string.trim = function (self)
 	local aux = self:gsub("^%s*(.-)%s*$", "%1")
 	return aux
 end
 
 
-string.urlize = function(self)
+string.urlize = function (self)
 	local aux = self:gsub("([^0-9a-zA-Z:%s%-%.])", function (c)
 		return ("%%%02X"):format(c:byte())
 	end)

@@ -1,7 +1,7 @@
 require "sepia"
 
 
-local app = function(skt, addr)
+local app = function (skt, addr)
 	print("Connection from " .. addr.host .. ":" .. addr.port)
 	skt:send "> "
 	print("Received: " .. skt:receive())
