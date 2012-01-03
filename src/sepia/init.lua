@@ -11,6 +11,7 @@ _PACKAGE = "sepia"
 local _application = 0
 local _address = 0
 
+system = {}
 
 function register_application(app)
 	if type(app) == "function" then
@@ -42,7 +43,7 @@ function loop()
 	end
 
 	require "sepia.log"
-	sepia.system = { print = _G["print"] }
+	system.print = _G["print"]
 	_G["print"] = sepia.log.info
 
 	local server, status, error
